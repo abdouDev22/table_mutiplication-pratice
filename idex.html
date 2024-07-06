@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="s"><b id="f"><s>Niveau 1</s></b></div>
+   
+    <div class="gg"> 
+        <span>Tu as gagné</span>
+    </div>
+    <div class="vv "> 
+        <span>Tu as échoué</span>
+    </div>
+    <div class="d"> 
+        <s ><span class="pre"></span>*<span class="dex"></span>:</s> <span id="a">Quiter</span>
+        <div class="dd">
+            <div class="grid">
+            <div class="item">
+                
+                <div class="item-content"> <s class="ax">5</s></div></div>
+            
+            <div class="item">
+                <div class="item-content"> <s class="bx">7</s></div></div>
+            
+            <div class="item">
+                <div class="item-content"><s class="cx">10 </s></div></div>
+            
+            <div class="item">
+                <div class="item-content"><s class="dx">20</s></div></div>
+            </div>
+        </div></div>
+    </div>
+    <script>
+    
+    </script>
+<script>
+    const mm = console.log;
+
+    function genererDeuxChiffresAleatoires() {
+    const chiffre1 = Math.floor(Math.random() * 11); // Génère un nombre aléatoire entre 0 et 10
+    const chiffre2 = Math.floor(Math.random() * 11); // Génère un autre nombre aléatoire entre 0 et 10
+    return [chiffre1, chiffre2];
+}
+
+function multiplicationEtGenererAutresChiffres(chiffre1, chiffre2) {
+    // Effectuer la multiplication
+    const resultatMultiplication = chiffre1 * chiffre2;
+
+    // Générer quatre chiffres aléatoires
+    const chiffre3 = Math.floor(Math.random() * 11);
+    const chiffre4 = Math.floor(Math.random() * 11);
+    const chiffre5 = Math.floor(Math.random() * 11);
+
+
+    // Retourner un tableau avec les chiffres générés et le résultat de la multiplication
+    return [chiffre3, chiffre4, resultatMultiplication, chiffre5];
+}
+
+
+</script>
+
+<script>
+    const Niveau1=document.querySelector('.s')
+   
+    const quite=document.querySelector('#a')
+    const pageNimaeu1=document.querySelector('.d')
+
+    Niveau1.addEventListener('click',(event)=>{
+        const clickedElement = event.target;
+        Niveau1.classList.add('left');
+        pageNimaeu1.classList.add('right');
+
+     
+// Exemple d'utilisation avec stockage dans des chiffresArray
+const [premierChiffre, deuxiemeChiffre] = genererDeuxChiffresAleatoires();
+
+const pre=document.querySelector('.pre')
+const dex = document.querySelector('.dex')
+dex.innerHTML=deuxiemeChiffre
+pre.innerHTML=premierChiffre
+
+
+
+
+// Exemple d'utilisation avec les chiffres générés précédemment
+const  [troisiemeChiffre, quatriemeChiffre, resultat, cinquiemeChiffre] = multiplicationEtGenererAutresChiffres(premierChiffre, deuxiemeChiffre);
+const chiffresArray = [troisiemeChiffre, quatriemeChiffre, resultat, cinquiemeChiffre];
+for (let i = chiffresArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [chiffresArray[i], chiffresArray[j]] = [chiffresArray[j], chiffresArray[i]];
+}
+
+// Affecter les chiffresArray aux éléments HTML
+const ax = document.querySelector('.ax');
+ax.innerHTML = chiffresArray[0];
+
+const bx = document.querySelector('.bx');
+bx.innerHTML = chiffresArray[1];
+
+const cx = document.querySelector('.cx');
+cx.innerHTML = chiffresArray[2];
+
+const dx = document.querySelector('.dx');
+dx.innerHTML = chiffresArray[3];
+for (let i = 0; i < chiffresArray.length; i++) {
+    // Afficher chaque élément du tableau dans la console
+    if(chiffresArray[i]==resultat){
+        if(i==0){
+            ax.classList.add('K')
+        }else{
+            ax.classList.remove('K')
+            ax.classList.add('m')
+        }
+        if(i==1){
+            bx.classList.add('K')
+        }else{
+            bx.classList.remove('K')
+            bx.classList.add('m')
+        }
+        if(i==2){
+            cx.classList.add('K')
+        }else{
+            cx.classList.remove('K')
+            cx.classList.add('m')
+        }
+        if(i==3){
+            dx.classList.add('K')
+        }else{
+            dx.classList.remove('K')
+            dx.classList.add('m')
+        }
+
+
+    }
+}
+
+
+
+  
+
+
+
+
+
+    })
+
+    document.addEventListener('click', (event) => {
+    const clickedElement = event.target;
+
+    // Vérifiez si l'élément cliqué a la classe "K"
+    if (clickedElement.classList.contains('K')) {
+        const gg = document.querySelector('.gg');
+        gg.classList.add('right');
+        pageNimaeu1.classList.remove('right')
+
+    }else if(clickedElement.classList.contains('m')){
+        const vv = document.querySelector('.vv');
+        vv.classList.add('right');
+        pageNimaeu1.classList.remove('right')
+        }
+});
+
+
+
+
+
+    quite.addEventListener('click',()=>{
+        Niveau1.classList.remove('left')
+        pageNimaeu1.classList.remove('right')
+    })
+</script>
+   
+<script src="https://cdn.jsdelivr.net/npm/muuri@0.9.5/dist/muuri.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations.min.js"></script>
+
+
+      <script>
+        var grid = new Muuri('.grid', {
+            dragEnabled: false,
+            dragHandle: '.item-content', // Activer la poignée de glisser-déposer pour déplacer les éléments
+            layout: {
+                fillGaps: true,
+                horizontal: false,
+            },
+            layoutDuration: 400
+        });
+        function resizeGrid() {
+      grid.layout();
+    }
+        grid.refreshItems().layout();
+        window.addEventListener('load', resizeGrid);
+    </script>
+
+
+    
+
+
+
+</body>
+</html>
